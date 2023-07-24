@@ -1,12 +1,12 @@
-FROM python:3.9
+# Use the official Nginx base image from Docker Hub
+FROM nginx:latest
 
-WORKDIR /app/backend
+# Copy your HTML files into the Nginx default web root directory
+COPY ./path/to/your/html/files /usr/share/nginx/html
 
-COPY requirements.txt /app/backend
-RUN pip install -r requirements.txt
+# Expose port 80 for HTTP traffic (the default port for Nginx)
+EXPOSE 80
 
-COPY . /app/backend
+# Command to start Nginx when the container runs
+CMD ["nginx", "-g", "daemon off;"]
 
-EXPOSE 8000
-
-CMD python /app/backend/manage.py runserver 0.0.0.0:8000
